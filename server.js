@@ -7,20 +7,20 @@ let index = 0;
 
 io.on("connection", socket => {
 
-    socket.emit(`loggedIn`, {
+    socket.emit('loggedIn', {
         users: users.map(s => s.username),
         messages: messages
     });
 
-    socket.on(`newuser`, username =>{
+    socket.on('newuser', username => {
       console.log(`${username} has arrived into the chat`);
       socket.username = username;
       users.push(socket);
 
-      io.emit(`userOnline`, socket.username);
+      io.emit('userOnline', socket.username);
     });
 
-    socket.on(`msg`, msg => {
+    socket.on('msg', msg => {
         let message = {
             index: index,
             username: socket.username,
